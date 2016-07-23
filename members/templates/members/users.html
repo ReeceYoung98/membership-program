@@ -1,18 +1,19 @@
 {% extends 'members/includes/page.html' %}
 
 {% block content %}
-	<div class="col-md-6 col-md-offset-3">
-		{% if all_users %}
-			{% for user in all_users %}
-				<h3><a href="/users/{{ user.id }}/">{{ user.first_name }} {{ user.last_name }}</a></h3><br />
-			{% endfor %}
-		{% elif retrieved_user %}
-			<h3>User Id: {{ retrieved_user.id }}</h3>
-			<p>Name: {{ retrieved_user.first_name}} {{ retrieved_user.last_name }}</p>
-			<p>Email: {{ retrieved_user.email }}</p>
-		{% else %}
-			<h3>No users</h3>
-		}
-		{% endif %}
-	</div>
+    <div class="col-md-6 col-md-offset-3">
+        {% if all_users %}
+            {% for user in all_users %}
+                <h3><a href="/users/{{ user.id }}/">{{ user.first_name }} {{ user.last_name }}</a></h3><br/>
+            {% endfor %}
+        {% elif retrieved_user %}
+            <h3>Name: {{ retrieved_user.first_name }} {{ retrieved_user.last_name }}</h3>
+            <p>Username: {{ retrieved_user.username }}</p>
+            <p>Email: {{ retrieved_user.email }}</p>
+            <p>Unique ID: {{ retrieved_user.id }}</p>
+        {% else %}
+            <h3>No users</h3>
+            }
+        {% endif %}
+    </div>
 {% endblock %}
