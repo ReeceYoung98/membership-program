@@ -1,12 +1,13 @@
-from django.http import Http404
-from django.shortcuts import render, redirect, HttpResponseRedirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.views.generic import View
-from .forms import RegisterForm, LoginForm
-from django.contrib.auth.decorators import user_passes_test
-
 from django.conf import settings
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.models import User
+from django.http import Http404
+from django.shortcuts import render, redirect
+from django.views.generic import View
+
+from members.models import Membership
+from .forms import ClassForm, RegisterForm, LoginForm
 
 
 def allusers(request):
@@ -19,7 +20,15 @@ def profile(request, user_id):
         retrieved_user = User.objects.get(id=user_id)
     except User.DoesNotExist:
         raise Http404('User does not exist')
-    return render(request, 'members/users.html', {'retrieved_user': retrieved_user,})
+    return render(request, 'members/users.html', {'retrieved_user': retrieved_user})
+
+
+def classes(request, user_id):
+    try:
+        retrieved_classes = Membership.objects.filter(user=user_id)
+    except retrieved_classes.DoesNotExist:
+        raise Http404('User does not exist')
+    return render(request, 'members/users.html', {'retrieved_classes': retrieved_classes})
 
 
 class RegisterFormView(View):
@@ -76,6 +85,28 @@ class LoginFormView(View):
                 login(request, user)
                 return redirect('members:allusers')
         return render(request, 'members/login_form.html', {'form': form})
+
+
+class ClassFormView(View):
+    form_class = ClassForm
+
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, 'members/class_form.html', {'form': form})
+
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            member = form.save(commit=False)
+
+            type = form.cleaned_data['type']
+
+            member.user = request.user
+
+            member.save()
+
+        return redirect('members:allusers')
 
 
 def anonymous_required(function=None, redirect_url=None):

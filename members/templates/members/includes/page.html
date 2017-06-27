@@ -2,52 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <title>Members Login</title>
+    <title>Gym Memberships</title>
 
-    <meta name="description" content="IT Apprenticeship">
+    <meta name="description" content="IT Developer">
     <meta name="author" content="Reece Young">
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
-          integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 
-<body bgcolor="#FA6607">
+<body>
 <div class="container">
     <header>
         <nav class="navbar">
-            <div class="container">
-                <div class="col-md-8">
-                    <a href="/"><h2>Restricted Users Only</h2></a>
-                </div>
-                <div class="col-md-4">
-                    <p class="navbar-text navbar-right">
-                        <br/>
-                        {% if user.is_authenticated %}
+            <div class="col-md-8">
+                <a href="/"><h2>Gym Memberships</h2></a>
+            </div>
+            <div class="col-md-4">
+                <p class="navbar-text navbar-right">
+                    <br/>
+                    {% if user.is_authenticated %}
 
-					        <p>You are logged in as:</p>
-				            <ul>
-				                <li>Name: {{ user.first_name }} {{ user.last_name }}</li>
-				                <li>Username: {{ user.username }}</li>
-				                <li>Email: {{ user.email }}</li>
-				                <li>Unique ID: {{ user.id }}</li>
-				            </ul>
-                            <h4><a href="/logout/">Logout</a></h4>
-                        {% else %}
-                            You need to <a href="/">login</a> or <a href="/register/">register</a>.
-                        {% endif %}
-                    </p>
-                </div>
+                        <p>You are logged in as:</p>
+                        <ul>
+                            <li>Name: {{ user.first_name }} {{ user.last_name }}</li>
+                            <li><a href="/users/add_classes/">Add new Gym Classes to your Account</a></li>
+                        <h4><a href="/logout/">Logout</a></h4>
+                    {% else %}
+                        You need to <a href="/">login</a> or <a href="/register/">register</a>.
+                    {% endif %}
+                </p>
             </div>
         </nav>
     </header>
@@ -58,7 +51,7 @@
     <br/><br/>
     <div class="footer">
         <div class="container">
-            <p class="text-muted">Copyright &copy; 2016, Reece Young. All rights reserved.</p>
+            <p class="text-muted">Copyright &copy; 2017, <a href="http://www.reeceyoung.co.uk/" target="_blank">Reece Young</a>. All rights reserved.</p>
         </div>
     </div>
 </div>

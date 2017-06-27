@@ -11,9 +11,14 @@
             <p>Username: {{ retrieved_user.username }}</p>
             <p>Email: {{ retrieved_user.email }}</p>
             <p>Unique ID: {{ retrieved_user.id }}</p>
+            <br />
+            <p><a href="classes/">View this Users Gym Classes</a></p>
+        {% elif retrieved_classes %}
+            {% for class in retrieved_classes %}
+                <h3>{{ class.type }} - {{ class.expiry }}</h3><br/>
+            {% endfor %}
         {% else %}
-            <h3>No users</h3>
-            }
+            <h3>Nothing found in database.</h3>
         {% endif %}
     </div>
 {% endblock %}
